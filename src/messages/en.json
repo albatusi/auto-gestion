@@ -1,0 +1,11 @@
+{
+  "config.title": "Settings",
+  "config.darkMode": "Dark Mode",
+  "config.language": "Language",
+  "config.changePassword": "Change Password",
+  "config.newPassword": "New Password",
+  "config.confirmPassword": "Confirm Password",
+  "config.activate": "Activate",
+  "config.deactivate": "Deactivate",
+  "config.change": "Change"
+}

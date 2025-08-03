@@ -1,15 +1,10 @@
-interface Props {
-  title: string;
-  children: React.ReactNode;
-}
-
-export default function AuthCard({ title, children }: Props) {
+export default function AuthCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-      <div className="w-full max-w-md p-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">{title}</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md space-y-6">
+        <h2 className="text-2xl font-bold text-center text-blue-600">{title}</h2>
         {children}
       </div>
-    </section>
+    </div>
   );
 }
