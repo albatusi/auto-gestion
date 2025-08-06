@@ -1,0 +1,17 @@
+{
+  "navbar": {
+    "logout": "Logout"
+  },
+  "sidebar": {
+    "home": "Home",
+    "summary": "Summary",
+    "vehicles": "Vehicles",
+    "movements": "Movements",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "home": {
+    "welcome": "Welcome to AutoTrack AI",
+    "description": "Manage and monitor vehicle movements intelligently"
+  }
+}

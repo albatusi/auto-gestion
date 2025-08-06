@@ -1,18 +1,20 @@
 'use client';
-
+import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 export default function ConfiguracionPage() {
+  const t = useTranslations();
+  const locale = useLocale();
+  const router = useRouter();
+
   const [modoOscuro, setModoOscuro] = useState(false);
-  const [idioma, setIdioma] = useState('es');
   const [nuevaPassword, setNuevaPassword] = useState('');
   const [confirmarPassword, setConfirmarPassword] = useState('');
 
   useEffect(() => {
     const darkPreference = localStorage.getItem('darkMode') === 'true';
     setModoOscuro(darkPreference);
-    const savedLanguage = localStorage.getItem('language') || 'es';
-    setIdioma(savedLanguage);
   }, []);
 
   const toggleModoOscuro = () => {
@@ -26,10 +28,8 @@ export default function ConfiguracionPage() {
     }
   };
 
-  const cambiarIdioma = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const lang = e.target.value;
-    setIdioma(lang);
-    localStorage.setItem('language', lang);
+  const cambiarIdioma = (lang: string) => {
+    router.replace(`/${lang}/dashboard/configuracion`);
   };
 
   const cambiarPassword = () => {
@@ -44,24 +44,24 @@ export default function ConfiguracionPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Configuración</h1>
+      <h1 className="text-3xl font-bold">{t('config.title')}</h1>
 
       <div className="bg-white dark:bg-gray-800 p-6 rounded shadow space-y-4">
         <div className="flex items-center justify-between">
-          <span>Modo Oscuro</span>
+          <span>{t('config.darkMode')}</span>
           <button
             onClick={toggleModoOscuro}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
-            {modoOscuro ? 'Desactivar' : 'Activar'}
+            {modoOscuro ? t('config.deactivate') : t('config.activate')}
           </button>
         </div>
 
         <div className="flex items-center justify-between">
-          <span>Idioma</span>
+          <span>{t('config.language')}</span>
           <select
-            value={idioma}
-            onChange={cambiarIdioma}
+            value={locale}
+            onChange={(e) => cambiarIdioma(e.target.value)}
             className="p-2 border border-gray-300 rounded"
           >
             <option value="es">Español</option>
@@ -71,17 +71,17 @@ export default function ConfiguracionPage() {
       </div>
 
       <div className="bg-white dark:bg-gray-800 p-6 rounded shadow space-y-4">
-        <h2 className="text-xl font-semibold">Cambiar Contraseña</h2>
+        <h2 className="text-xl font-semibold">{t('config.changePassword')}</h2>
         <input
           type="password"
-          placeholder="Nueva contraseña"
+          placeholder={t('config.newPassword')}
           value={nuevaPassword}
           onChange={(e) => setNuevaPassword(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded text-black"
         />
         <input
           type="password"
-          placeholder="Confirmar contraseña"
+          placeholder={t('config.confirmPassword')}
           value={confirmarPassword}
           onChange={(e) => setConfirmarPassword(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded text-black"
@@ -90,7 +90,7 @@ export default function ConfiguracionPage() {
           onClick={cambiarPassword}
           className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
         >
-          Cambiar Contraseña
+          {t('config.change')}
         </button>
       </div>
     </div>
